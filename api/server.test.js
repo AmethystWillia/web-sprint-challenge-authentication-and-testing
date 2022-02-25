@@ -46,4 +46,13 @@ describe('Test users model', () => {
 
     expect(result).toHaveProperty('username', 'beep');
   });
+
+  test('Can update user', async () => {
+    const [id] = await db('users').insert({ username: 'test', password: 'beep' });
+    let result = await Users.update(id, { username: 'test' });
+
+    expect(result).toEqual({ id: 1, username: 'test', password: 'beep' });
+    result = await Users.getById(id);
+    expect(result).toEqual({ id: 1, username: 'test', password: 'beep' });
+  });
 });
