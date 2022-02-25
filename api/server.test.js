@@ -69,3 +69,24 @@ describe('Test users model', () => {
   });
 });
 
+describe('Testing server endpoints', () => {
+  test('[POST] /auth/register - Can register', async () => {
+    let result = await request(server)
+      .post('/register')
+      .send({ username: 'beep', password: 'boop' });
+    expect(result.status).toBe(201);
+
+    result = await Users.getById(1);
+    expect(result.username).toBe('beep');
+  });
+
+  test('[POST] /auth/register - Password is hashed', async () => {
+    let result = await request(server)
+      .post('/register')
+      .send({ username: 'beep', password: 'boop' });
+    expect(result.status).toBe(201);
+
+    result = await Users.getById(1);
+    expect(result.password).not.toBe('boop');
+  });
+});
