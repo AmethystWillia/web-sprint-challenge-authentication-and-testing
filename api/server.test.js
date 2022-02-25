@@ -93,4 +93,16 @@ describe('Testing server endpoints', () => {
 
       expect(result).not.toHaveProperty('password', 'bar');
   });
+  // -------------------------- //
+  test('[POST] /auth/login - Welcomes on successful login', async () => {
+    await request(server)
+      .post('/api/auth/register')
+      .send({ username: 'foo', password: 'bar' });
+
+    const res = await request(server)
+      .post('/api/auth/login')
+      .send({ username: 'foo', password: 'bar' });
+
+    expect(res.body.message).toMatch(/welcome, foo/i);
+  });
 });
