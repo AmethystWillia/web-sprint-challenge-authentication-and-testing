@@ -10,6 +10,11 @@ const getById = (id) => {
         .first();
 };
 
+const getBy = (filter) => {
+    return db('users')
+        .where(filter);
+};
+
 const insert = async (user) => {
     const [id] = await db('users')
         .insert(user);
@@ -38,6 +43,7 @@ const remove = async (id) => {
 module.exports = {
     getAll,
     getById,
+    getBy,
     insert,
     update,
     remove,
