@@ -27,4 +27,16 @@ describe('Test users model', () => {
 
     expect(users).toHaveLength(0);
   });
+
+  test('Can insert new user', async () => {
+    let result = await Users.insert({ username: 'test', password: 'beep' });
+    expect(result).toEqual({ id: 1, username: 'test', password: 'beep' });
+
+    let users = await db('users');
+    expect(users).toHaveLength(1);
+
+    await Users.insert({ username: 'beep', password: 'boop' });
+    users = await db('users');
+    expect(users).toHaveLength(2);
+  });
 });
