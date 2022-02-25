@@ -47,8 +47,7 @@ router.post('/register', validateInput, checkUsernameFree, (req, res, next) => {
         .catch(next);
 });
 
-router.post('/login', (req, res) => {
-  res.end('implement login, please!');
+router.post('/login', checkUsernameExists, (req, res) => {
   /*
     IMPLEMENT
     You are welcome to build additional middlewares to help with the endpoint's functionality.
@@ -73,5 +72,17 @@ router.post('/login', (req, res) => {
       the response body should include a string exactly as follows: "invalid credentials".
   */
 });
+
+const makeToken = (user) => {
+  const payload = {
+    subject: user.id,
+    username: user.username,
+  };
+  const options = {
+    expiresIn: '1d',
+  };
+
+  return jwt.sign(payload, JWT_SECRET, options);
+};
 
 module.exports = router;
