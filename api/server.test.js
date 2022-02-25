@@ -39,4 +39,11 @@ describe('Test users model', () => {
     users = await db('users');
     expect(users).toHaveLength(2);
   });
+
+  test('Can get user by ID', async () => {
+    const [id] = await db('users').insert({ username: 'beep', password: 'boop' });
+    let result = await Users.getById(id);
+
+    expect(result).toHaveProperty('username', 'beep');
+  });
 });
