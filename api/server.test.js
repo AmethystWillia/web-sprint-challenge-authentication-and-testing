@@ -1,4 +1,5 @@
 const db = require('../data/dbConfig');
+const Users = require('./users/users-model');
 
 const request = require('supertest');
 const server = require('./server');
@@ -17,5 +18,13 @@ beforeEach(async () => {
 // -------------------------- //
 
 test('sanity', () => {
-  expect(true).toBe(false);
+  expect(true).toBe(true);
+});
+
+describe('Test users model', () => {
+  test('Table starts empty', async () => {
+    const users = await db('users');
+
+    expect(users).toHaveLength(0);
+  });
 });
