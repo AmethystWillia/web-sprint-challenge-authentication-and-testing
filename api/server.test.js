@@ -83,6 +83,14 @@ describe('Testing server endpoints', () => {
   });
 
   test('[POST] /auth/register - Password is hashed', async () => {
-    expect(true).toBe(false);
+    await request(server)
+      .post('/api/auth/register')
+      .send({ username: 'foo', password: 'bar' });
+    
+      const result = await db('users')
+        .where('username', 'foo')
+        .first()
+
+      expect(result).not.toHaveProperty('password', 'bar');
   });
 });
