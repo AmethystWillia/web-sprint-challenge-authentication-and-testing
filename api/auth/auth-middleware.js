@@ -1,6 +1,4 @@
 const Users = require('../users/users-model');
-const jwt = require('jsonwebtoken');
-const JWT_SECRET = process.env.JWT_SECRET;
 
 const checkUsernameFree = async (req, res, next) => {
     try {
