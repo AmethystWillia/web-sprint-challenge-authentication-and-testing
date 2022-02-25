@@ -68,3 +68,4 @@ describe('Test users model', () => {
     expect(result).not.toBeDefined();
   });
 });
+
