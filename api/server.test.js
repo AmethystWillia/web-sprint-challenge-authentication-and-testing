@@ -123,4 +123,10 @@ describe('Testing server endpoints', () => {
 
     expect(res.text).toMatch(/token required/i);
   });
+
+  test('[GET] /api/jokes - Invalid token returns proper message', async () => {
+    const res = await request(server).get('/api/jokes').set('Authorization', 'lol');
+
+    expect(res.text).toMatch(/token invalid/i);
+  });
 });
