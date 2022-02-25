@@ -55,4 +55,16 @@ describe('Test users model', () => {
     result = await Users.getById(id);
     expect(result).toEqual({ id: 1, username: 'test', password: 'beep' });
   });
+
+  test('Can delete a user', async () => {
+    let result = await Users.insert({ username: 'beep', password: 'boop' });
+    result = await Users.getById(result.id);
+    expect(result).toHaveProperty('username', 'beep');
+
+    result = await Users.remove(result.id);
+    expect(result).toEqual({ id: 1, username: 'beep', password: 'boop' });
+
+    result = await Users.getById(result.id);
+    expect(result).not.toBeDefined();
+  });
 });
