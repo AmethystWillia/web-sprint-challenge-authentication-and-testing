@@ -105,4 +105,16 @@ describe('Testing server endpoints', () => {
 
     expect(res.text).toMatch(/welcome, foo/i);
   });
+
+  test('[POST] /auth/login - No login if invalid credentials', async () => {
+    await request(server)
+      .post('/api/auth/register')
+      .send({ username: 'foo', password: 'bar' });
+
+    const res = await request(server)
+      .post('/api/auth/login')
+      .send({ username: 'beep', password: 'bar' });
+
+    expect(res.text).toMatch(/invalid credentials/i);
+  });
 });

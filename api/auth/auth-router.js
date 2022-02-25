@@ -80,7 +80,7 @@ router.post('/login', checkUsernameExists, (req, res, next) => {
 
           res.status(200).json({ message: `welcome, ${username}`, token });
           } else {
-            next();
+            res.status(401).json({ message: 'invalid credentials' });
           }
         })
         .catch(next);
