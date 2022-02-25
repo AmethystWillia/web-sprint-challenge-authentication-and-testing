@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const Users = require('../users/users-model');
-const { checkUsernameFree, validateInput } = require('../auth/auth-middleware');
+const { checkUsernameFree, validateInput, checkUsernameExists } = require('../auth/auth-middleware');
 
 const bcrypt = require('bcryptjs');
 const JWT_SECRET = process.env.JWT_SECRET;
