@@ -103,6 +103,6 @@ describe('Testing server endpoints', () => {
       .post('/api/auth/login')
       .send({ username: 'foo', password: 'bar' });
 
-    expect(res.body.message).toMatch(/welcome, foo/i);
+    expect(res.text).toMatch(/welcome, foo/i);
   });
 });
